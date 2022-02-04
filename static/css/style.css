@@ -1,0 +1,29 @@
+body {
+   color:#903b30;
+   text-align: center
+}
+
+button {
+    color: #903b30;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 1;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    width: 6em;
+    height: 3em;
+    margin-top: 10px;
+
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid #903b30;
+    border-radius: 20px;
+    transition: all .35s;
+}
+
+button:hover {
+    background-color:#903b30;
+    color: #ffe0dd
+}
+
