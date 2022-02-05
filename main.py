@@ -65,6 +65,7 @@ def show_image():
                           </body>
                         </html>"""
 
+
 @app.route('/promotion_image')
 def promotion_image():
     alerts = ["primary", "secondary", "success", "danger", "warning", "info", "light"]
@@ -92,6 +93,7 @@ def promotion_image():
                                 <button onclick="window.location.href = '/';" color="#ffcc00">На главную</button>
                               </body>
                             </html>"""
+
 
 @app.route('/form', methods=['POST', 'GET'])
 def form_sample():
@@ -226,6 +228,38 @@ def form_sample():
                         </html>'''
     elif request.method == 'POST':
         return '''<h1>Форма отправлена</h1><button onclick="window.location.href = '/';" color="#ffcc00">На главную</button>'''
+
+
+@app.route('/choice/<name>')
+def choice(name):
+    lines = f"<h1>Мое предложение{name}</h1>"
+    alerts = ["primary", "secondary", "success", "danger", "warning", "info", "light"]
+    try:
+        with open(f'static/texts/{name}.txt', mode='rt', encoding='utf-8') as file:
+            for line in file.read().split('\n'):
+                lines += f'<div class="alert alert-{__import__("random").choice(alerts)}">{line}</div>'
+    except (FileNotFoundError, FileExistsError):
+        lines += f'<div class="alert alert-warning">К сожалению мы пока не знаем о такой планете</div>'
+        lines += f'<div class="alert alert-success">Возможно, однажды именно ты возглавишь экспедицию туда!</div>'
+        lines += f'<div class="alert alert-success">А пока подожди...</div>'
+    return f"""<!doctype html>
+                            <html lang="en">
+                              <head>
+                                <meta charset="utf-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" 
+                                integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
+                                crossorigin="anonymous">
+                                <link rel="stylesheet" href="/static/css/style.css">
+                                <title>Рекламная кампания</title>
+                              </head>
+                              <body>
+                                <h1>Наша кампания</h1>
+                                {lines}
+                                <button onclick="window.location.href = '/';" color="#ffcc00">На главную</button>
+                              </body>
+                            </html>"""
+
 
 @app.route('/')
 def start_page():
