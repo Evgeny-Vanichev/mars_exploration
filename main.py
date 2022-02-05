@@ -232,7 +232,7 @@ def form_sample():
 
 @app.route('/choice/<name>')
 def choice(name):
-    lines = f"<h1>Мое предложение{name}</h1>"
+    lines = f"<h2>Мое предложение: {name}</h2>"
     alerts = ["primary", "secondary", "success", "danger", "warning", "info", "light"]
     try:
         with open(f'static/texts/{name}.txt', mode='rt', encoding='utf-8') as file:
@@ -254,7 +254,6 @@ def choice(name):
                                 <title>Рекламная кампания</title>
                               </head>
                               <body>
-                                <h1>Наша кампания</h1>
                                 {lines}
                                 <button onclick="window.location.href = '/';" color="#ffcc00">На главную</button>
                               </body>
