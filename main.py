@@ -65,6 +65,34 @@ def show_image():
                           </body>
                         </html>"""
 
+@app.route('/promotion_image')
+def promotion_image():
+    alerts = ["primary", "secondary", "success", "danger", "warning", "info", "light"]
+    lines = ""
+    with open('static/texts/promotion.txt', mode='rt', encoding='utf-8') as file:
+        for line in file.read().split('\n'):
+            lines += f'<div class="alert alert-{__import__("random").choice(alerts)}">{line}</div>'
+    return f"""<!doctype html>
+                            <html lang="en">
+                              <head>
+                                <meta charset="utf-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                                <link rel="stylesheet" 
+                                href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" 
+                                integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
+                                crossorigin="anonymous">
+                                <link rel="stylesheet" href="/static/css/style.css">
+                                <title>Привет, Марс!</title>
+                              </head>
+                              <body>
+                                <h1 class=surprise>Жди нас, Марс!</h1>
+                                <img src="{url_for('static', filename='img/mars.png')}" width=600 height=600
+                                alt="здесь должна была быть картинка, но не нашлась">
+                                {lines}
+                                <button onclick="window.location.href = '/';" color="#ffcc00">На главную</button>
+                              </body>
+                            </html>"""
+
 
 @app.route('/')
 def start_page():
@@ -83,6 +111,8 @@ def start_page():
                     <button onclick="window.location.href = '/promotion';" color="#ffcc00">Наша компания!</button>
                     <br>
                     <button onclick="window.location.href = '/image_mars';" color="#ffcc00">Фото марса</button>
+                    <br>
+                    <button onclick="window.location.href = '/promotion_image';" color="#ffcc00">Красивая реклама</button>
                   </body>
                 </html>"""
 
