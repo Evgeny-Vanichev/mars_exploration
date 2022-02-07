@@ -259,6 +259,7 @@ def choice(name):
                               </body>
                             </html>"""
 
+
 @app.route('/results/<nickname>/<int:level>/<float:rating>')
 def results(nickname, level, rating):
     return f"""<!doctype html>
@@ -283,6 +284,11 @@ def results(nickname, level, rating):
                                   </body>
                                 </html>"""
 
+@app.route('/views')
+def carousel():
+    with open('static/html/index.html', mode='rt', encoding='utf-8') as file:
+        return file.read()
+
 
 @app.route('/')
 def start_page():
@@ -305,6 +311,8 @@ def start_page():
                     <button onclick="window.location.href = '/promotion_image';" color="#ffcc00">Красивая реклама</button>
                     <br>
                     <button onclick="window.location.href = '/form';" color="#ffcc00">Подать заявку</button>
+                    <br>
+                    <button onclick="window.location.href = '/views';" color="#ffcc00">Виды Марса</button>
                   </body>
                 </html>"""
 
